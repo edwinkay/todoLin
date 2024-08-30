@@ -107,10 +107,9 @@ export class TodoListComponent implements OnInit {
     this.ocultar = false
     const task = this.tasks[index];
     if (this.nueva?.trim()) {
-      task.subTask = this.nueva.trim(); // Asignar el valor a subTask
-      this.nueva = ''; // Limpiar el campo de entrada
-
-      task.showSubTaskInput = false; // Ocultar el campo de entrada
+      task.subTask = this.nueva.trim();
+      this.nueva = '';
+      task.showSubTaskInput = false;
 
       this.todoService
         .updateTask(task)
