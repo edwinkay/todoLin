@@ -10,12 +10,11 @@ import { TodoService } from '../services/todo.service';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit {
-  tasks: Task[] = [];
+  tasks: any[] = [];
   newTask: string = '';
   errorMessage: string = '';
-  nueva:any
-  mostrar:any
-
+  nueva: any;
+  ocultar ?: boolean = false;
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
@@ -85,6 +84,7 @@ export class TodoListComponent implements OnInit {
   }
 
   toggleTaskCompletion(index: number) {
+    this.ocultar = true
     const task = this.tasks[index];
     task.completed = !task.completed;
     this.tasks[index].showSubTaskInput = task.completed;
@@ -104,29 +104,33 @@ export class TodoListComponent implements OnInit {
   }
 
   addSubTask(index: number) {
+    this.ocultar = false
     const task = this.tasks[index];
-    this.mostrar = this.nueva
-    task.showSubTaskInput = false;
+    if (this.nueva?.trim()) {
+      task.subTask = this.nueva.trim(); // Asignar el valor a subTask
+      this.nueva = ''; // Limpiar el campo de entrada
 
-    if (task.subTask?.trim()) {
+      task.showSubTaskInput = false; // Ocultar el campo de entrada
 
-
-      // this.todoService
-      //   .addTask(subTask)
-      //   .pipe(
-      //     catchError((error) => {
-      //       this.errorMessage = 'Error al añadir la sub-tarea.';
-      //       console.error(error);
-      //       return of(null);
-      //     })
-      //   )
-      //   .subscribe((newTask) => {
-      //     if (newTask) {
-      //       task.subTask = '';
-      //       task.showSubTaskInput = false;
-      //       this.tasks[index] = { ...this.tasks[index] };
-      //     }
-      //   });
+      this.todoService
+        .updateTask(task)
+        .pipe(
+          catchError((error) => {
+            task.showSubTaskInput = false;
+            this.errorMessage = 'Error al actualizar la tarea.';
+            console.error(error);
+            return of(task);
+          })
+        )
+        .subscribe((updatedTask) => {
+          // Asegurarse de que la tarea se actualiza en la vista
+          const taskIndex = this.tasks.findIndex(
+            (t) => t.id === updatedTask.id
+          );
+          if (taskIndex !== -1) {
+            this.tasks[taskIndex] = updatedTask;
+          }
+        });
     }
   }
 }

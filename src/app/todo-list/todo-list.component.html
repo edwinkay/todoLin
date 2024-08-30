@@ -22,10 +22,11 @@
         >
           {{ task.title }}
         </mat-checkbox>
-        <div *ngIf="task.showSubTaskInput">
+        <div *ngIf="ocultar">
+          <div *ngIf="task.showSubTaskInput">
           <mat-form-field appearance="outline">
             <mat-label>Sub-tarea</mat-label>
-            <input matInput [(ngModel)]="nueva" />
+            <input matInput [(ngModel)]="task.subTask" />
           </mat-form-field>
           <button
             mat-raised-button
@@ -35,11 +36,13 @@
             Añadir sub-tarea
           </button>
         </div>
+        </div>
+
 
         <button mat-icon-button color="warn" (click)="removeTask(i)">
           <mat-icon>delete</mat-icon>
         </button>
-        <div>{{mostrar}}</div>
+        <div>{{ task.subTask }}</div>
       </mat-list-item>
     </mat-list>
   </mat-card>
