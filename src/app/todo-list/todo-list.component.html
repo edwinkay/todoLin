@@ -2,18 +2,36 @@
   <mat-card>
     <mat-card-title>To-Do List</mat-card-title>
 
-    <mat-form-field style="padding-right: 5px;" appearance="outline">
+    <mat-form-field style="padding-right: 5px" appearance="outline">
       <mat-label>Agrega una nueva nota</mat-label>
       <input matInput [(ngModel)]="newTask" />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="addTask()">Nueva nota</button>
+    <button mat-raised-button color="primary" (click)="addTask()">
+      Nueva nota
+    </button>
 
     <mat-list>
-      <mat-list-item *ngFor="let task of tasks; let i = index" [class.completed]="task.completed">
-        <mat-checkbox [(ngModel)]="task.completed" (change)="toggleTaskCompletion(i)">
+      <mat-list-item
+        *ngFor="let task of tasks; let i = index"
+        [class.completed]="task.completed"
+      >
+        <mat-checkbox
+          (click)="toggleTaskCompletion(i)"
+          [(ngModel)]="task.completed"
+        >
           {{ task.title }}
         </mat-checkbox>
+        <div *ngIf="task.showSubTaskInput">
+          <mat-form-field appearance="outline">
+            <mat-label>Sub-tarea</mat-label>
+            <input matInput [(ngModel)]="task.subTask" />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addSubTask(i)">
+            Añadir sub-tarea
+          </button>
+        </div>
+
         <button mat-icon-button color="warn" (click)="removeTask(i)">
           <mat-icon>delete</mat-icon>
         </button>
@@ -21,6 +39,3 @@
     </mat-list>
   </mat-card>
 </div>
-
-
-
