@@ -1,67 +1,21 @@
 .todo-container {
-  max-width: 400px;
-  margin: 50px auto;
+  max-width: 500px;
+  margin: 20px auto;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
 }
 
-h1 {
-  text-align: center;
-  color: #333;
+mat-card {
+  padding: 20px;
 }
 
-input[type="text"] {
-  width: calc(100% - 100px);
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
+mat-list-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 8px;
-  margin: 8px 0;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
 }
 
-li.completed {
+.completed {
   text-decoration: line-through;
-  color: #888;
+  color: grey;
 }
 
-li button {
-  background-color: #dc3545;
-}
-
-li button:hover {
-  background-color: #c82333;
-}
-
-input[type="checkbox"] {
-  margin-right: 10px;
-}

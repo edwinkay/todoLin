@@ -1,16 +1,26 @@
 <div class="todo-container">
-  <h1>To-Do List</h1>
+  <mat-card>
+    <mat-card-title>To-Do List</mat-card-title>
 
-  <input [(ngModel)]="newTask" placeholder="Agrega una nueva nota" />
-  <button (click)="addTask()">Nueva nota</button>
+    <mat-form-field appearance="outline">
+      <mat-label>Agrega una nueva nota</mat-label>
+      <input matInput [(ngModel)]="newTask" />
+    </mat-form-field>
 
-  <ul>
-    <li *ngFor="let task of tasks; let i = index" [class.completed]="task.completed">
-      <input type="checkbox" [(ngModel)]="task.completed" (change)="toggleTaskCompletion(i)" />
-      {{ task.title }}
-      <button (click)="removeTask(i)">Eliminar</button>
-    </li>
-  </ul>
+    <button mat-raised-button color="primary" (click)="addTask()">Nueva nota</button>
+
+    <mat-list>
+      <mat-list-item *ngFor="let task of tasks; let i = index" [class.completed]="task.completed">
+        <mat-checkbox [(ngModel)]="task.completed" (change)="toggleTaskCompletion(i)">
+          {{ task.title }}
+        </mat-checkbox>
+        <button mat-icon-button color="warn" (click)="removeTask(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
 </div>
+
 
 
