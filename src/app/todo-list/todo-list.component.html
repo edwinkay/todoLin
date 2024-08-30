@@ -25,9 +25,13 @@
         <div *ngIf="task.showSubTaskInput">
           <mat-form-field appearance="outline">
             <mat-label>Sub-tarea</mat-label>
-            <input matInput [(ngModel)]="task.subTask" />
+            <input matInput [(ngModel)]="nueva" />
           </mat-form-field>
-          <button mat-raised-button color="primary" (click)="addSubTask(i)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addSubTask(i)"
+          >
             Añadir sub-tarea
           </button>
         </div>
@@ -35,6 +39,7 @@
         <button mat-icon-button color="warn" (click)="removeTask(i)">
           <mat-icon>delete</mat-icon>
         </button>
+        <div>{{mostrar}}</div>
       </mat-list-item>
     </mat-list>
   </mat-card>

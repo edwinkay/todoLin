@@ -13,6 +13,8 @@ export class TodoListComponent implements OnInit {
   tasks: Task[] = [];
   newTask: string = '';
   errorMessage: string = '';
+  nueva:any
+  mostrar:any
 
   constructor(private todoService: TodoService) {}
 
@@ -103,30 +105,28 @@ export class TodoListComponent implements OnInit {
 
   addSubTask(index: number) {
     const task = this.tasks[index];
-    if (task.subTask?.trim()) {
-      const subTask: Task = {
-        userId: 1,
-        id: 0,
-        title: task.subTask.trim(),
-        completed: false,
-        showSubTaskInput: false,
-        subTask: '',
-      };
+    this.mostrar = this.nueva
+    task.showSubTaskInput = false;
 
-      this.todoService
-        .addTask(subTask)
-        .pipe(
-          catchError((error) => {
-            this.errorMessage = 'Error al añadir la sub-tarea.';
-            console.error(error);
-            return of(null);
-          })
-        )
-        .subscribe((newTask) => {
-          task.subTask = '';
-          task.showSubTaskInput = false;
-          this.tasks[index] = { ...this.tasks[index] };
-        });
+    if (task.subTask?.trim()) {
+
+
+      // this.todoService
+      //   .addTask(subTask)
+      //   .pipe(
+      //     catchError((error) => {
+      //       this.errorMessage = 'Error al añadir la sub-tarea.';
+      //       console.error(error);
+      //       return of(null);
+      //     })
+      //   )
+      //   .subscribe((newTask) => {
+      //     if (newTask) {
+      //       task.subTask = '';
+      //       task.showSubTaskInput = false;
+      //       this.tasks[index] = { ...this.tasks[index] };
+      //     }
+      //   });
     }
   }
 }
