@@ -1,7 +1,9 @@
 .todo-container {
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
+  display: flex;
+    max-width: 75%;
+    margin: 20px auto;
+    padding: 20px;
+    justify-content: center;
 }
 
 mat-card {

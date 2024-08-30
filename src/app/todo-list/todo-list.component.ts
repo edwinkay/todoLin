@@ -14,7 +14,7 @@ export class TodoListComponent implements OnInit {
   constructor(private todoService: TodoService) {} // Inyecta el servicio
 
   ngOnInit(): void {
-    this.loadTasks(); 
+    this.loadTasks();
   }
 
   // Cargar todas las tareas desde el servicio
@@ -28,8 +28,8 @@ export class TodoListComponent implements OnInit {
   addTask() {
     if (this.newTask.trim()) {
       const task: Task = {
-        userId: 1, 
-        id: 0, 
+        userId: 1,
+        id: 0,
         title: this.newTask.trim(),
         completed: false,
       };
